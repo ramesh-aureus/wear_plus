@@ -2,7 +2,7 @@ group 'dev.rexios.wear_plus'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.20'
+    ext.kotlin_version = '1.7.20' // You can update Kotlin if needed
     repositories {
         google()
         mavenCentral()
@@ -23,21 +23,34 @@ rootProject.allprojects {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 31
 
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
     defaultConfig {
         minSdkVersion 23
         consumerProguardFiles 'proguard-rules.pro'
     }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    compileOptions {
+        // Set Java compatibility to 1.8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        // Align Kotlin JVM target with Java 1.8
+        jvmTarget = "1.8"
+    }
+
     lintOptions {
         disable 'InvalidPackage'
     }
+
     namespace "dev.rexios.wear_plus"
 }
 
